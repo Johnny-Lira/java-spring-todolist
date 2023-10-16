@@ -8,3 +8,9 @@ COPY . .
 RUN apt-get install -y maven
 RUN mvn clean install
 
+EXPOSE 8080
+
+COPY --from=build /target/*.jar app.jar
+
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
+
